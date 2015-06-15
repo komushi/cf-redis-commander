@@ -1,0 +1,16 @@
+{
+  "name": "cf_redis_commander",
+  "version": "1.0.0",
+  "description": "redis commander wrapper for cloud foundry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cfenv": "^1.0.0",
+    "redis-commander": "^0.3.2"
+  }
+}
