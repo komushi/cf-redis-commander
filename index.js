@@ -13,17 +13,38 @@ var exec = require('child_process').exec,
 var cfenv = require("cfenv");
 var appEnv = cfenv.getAppEnv();
 var services = appEnv.getServices();
-var redisService = process.env["SERVICE_NAME"];
 
-var myservice = appEnv.getService(redisService);
-var credentials = myservice.credentials;
+
+
+// function to get credential from cf env
+var getCredentials = function() {
+
+	var appEnv = cfenv.getAppEnv();
+	var services = appEnv.getServices();
+
+	for (service in services) {
+	  if (services[service].tags.indexOf("mongodb") >= 0) {
+	    var credentials = services[service]["credentials"]
+
+	    console.log("********************************");
+	    console.log("Found ", service, " ", credentials);
+	    console.log("********************************");
+
+	    return credentials;
+	  }
+	}
+
+};
+
+var credentials = getCredentials;
+
 
 var cmd = "./node_modules/.bin/redis-commander";
 cmd += " --redis-port " + credentials.port;
 cmd += " --redis-host " + credentials.host;
 cmd += " --redis-password " + credentials.password;
-cmd += " --http-auth-username " + "lxu";
-cmd += " --http-auth-password " + "password";
+cmd += " --http-auth-username " + "admin";
+cmd += " --http-auth-password " + "pass";
 cmd += " --port " + process.env.PORT;
 
 console.log('cmd: ' + cmd);

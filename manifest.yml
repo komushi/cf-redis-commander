@@ -4,5 +4,6 @@ applications:
   memory: 256M
   instances: 1
   host: cf-redis-commander
-  env:
-    SERVICE_NAME: datasync-datastore-redis-data
+  services:
+    - datasync-datastore-redis-data
+    
