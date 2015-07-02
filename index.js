@@ -21,9 +21,9 @@ var getCredentials = function() {
 
 	var appEnv = cfenv.getAppEnv();
 	var services = appEnv.getServices();
-
+console.log(services);
 	for (service in services) {
-	  if (services[service].tags.indexOf("mongodb") >= 0) {
+	  if (services[service].tags.indexOf("redis") >= 0) {
 	    var credentials = services[service]["credentials"]
 
 	    console.log("********************************");
@@ -36,7 +36,7 @@ var getCredentials = function() {
 
 };
 
-var credentials = getCredentials;
+var credentials = getCredentials();
 
 
 var cmd = "./node_modules/.bin/redis-commander";
